@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .button-authentication {
+        @apply rounded-lg text-lg py-3 bg-blue-700 text-white w-1/4 hover:bg-blue-600 ease-out duration-300 shadow-lg;
+    }
+
+    .button-create{
+        @apply rounded-lg text-lg py-3 bg-blue-700 text-white w-1/5 hover:bg-blue-600 ease-out duration-300 shadow-lg;
+    }
+}
