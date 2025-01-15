@@ -1,15 +1,17 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index', ['name' => 'index']);
-});
+// GET route to show the home page.
+Route::get('/', [UserController::class, 'home'])->name('home');
 
-Route::get('/login', function () {
-    return view('login');
-});
+// GET route to show the login form.
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 
-Route::get('/register', function () {
-    return view('register');
-});
+
+// GET route to show the register form.
+Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register');
+
+// POST route to register a new User.
+Route::post('/register', [UserController::class, 'register'])->name('register');

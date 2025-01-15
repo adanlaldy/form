@@ -8,30 +8,47 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the home page.
      */
-    public function index()
+    public function home()
     {
-        //
+        return view('index');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created User in storage.
      */
-    public function create()
+    public function register(Request $request)
     {
-        //
+
+        // Check if input are valid with the method validate().
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        // Create a User.
+        User::create($validatedData);
+
+        // Redirect to Login view.
+        return redirect('/login')->with('message', 'Your account has been created');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the login page.
      */
-    public function store(Request $request)
+    public function showLoginForm()
     {
-        $data = $request->all();
-        $user = new User();
-        $user->fill($data);
-        $user->save();
+        return view('login');
+    }
+
+    /**
+     * Show the register page.
+     */
+    public function showRegisterForm()
+    {
+        return view('register');
     }
 
     /**
