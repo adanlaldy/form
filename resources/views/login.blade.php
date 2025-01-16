@@ -33,10 +33,19 @@
         </form>
         @if (session('message'))
 
-            <label class="py-2 text-center bg-green-500 text-white">
+            <div class="py-2 text-center bg-green-500 text-white">
                 {{ session('message') }}
-            </label>
+            </div>
 
+        @endif
+        @if ($errors->any())
+            <div class="py-2 text-center bg-red-500 text-white">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
     </section>
 </main>

@@ -47,7 +47,6 @@
                 </ul>
             </div>
         @endif
-
     </section>
 </main>
 </body>
