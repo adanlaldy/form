@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class, 'home'])->name('home');
 
 // GET route to show the login form.
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('get.login');
 
+// POST route to login a User.
+Route::post('/login', [UserController::class, 'login'])->name('post.login')->middleware('auth:sanctum');
 
 // GET route to show the register form.
-Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [UserController::class, 'showRegisterForm'])->name('get.register');
 
 // POST route to register a new User.
-Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'register'])->name('post.register');

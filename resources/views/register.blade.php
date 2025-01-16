@@ -12,7 +12,7 @@
 <main class="pt-16">
     <section class="mx-auto w-1/3 flex flex-col rounded-lg shadow-2xl bg-white">
         <h1 class="text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">Register</h1>
-        <form class="flex flex-col items-center py-4 gap-y-6" method="POST" action="{{ route('register') }}">
+        <form class="flex flex-col items-center py-4 gap-y-6" method="POST" action="{{ route('post.register') }}">
             @csrf
             <div class="flex flex-col">
                 <label>Name</label>
@@ -35,7 +35,7 @@
                 Register
             </button>
             <div class="text-xs">
-                <label>Already have an account? <a class="font-semibold underline" href="{{ route('login') }}">Login</a></label>
+                <label>Already have an account? <a class="font-semibold underline" href="{{ route('get.login') }}">Login</a></label>
             </div>
         </form>
     </section>

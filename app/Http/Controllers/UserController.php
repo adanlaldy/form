@@ -32,7 +32,7 @@ class UserController extends Controller
         User::create($validatedData);
 
         // Redirect to Login view.
-        return redirect('/login')->with('message', 'Your account has been created');
+        return redirect()->route('get.login')->with('message', 'Your account has been created');
     }
 
     /**
