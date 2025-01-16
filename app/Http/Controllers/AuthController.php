@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AuthController extends Controller
 {
     /**
      * Show the home page.
@@ -21,11 +21,12 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        // Check if input are valid with the method validate().
+        // Check if input are valid with the method validate() and return an error if failed.
         $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
         ]);
 
         // Create a User.

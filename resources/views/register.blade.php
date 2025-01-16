@@ -28,7 +28,7 @@
             </div>
             <div class="flex flex-col">
                 <label>Password confirmation</label>
-                <input class="border rounded-md" name="passwordConfirmation" placeholder="Confirm your password...">
+                <input class="border rounded-md" name="password_confirmation" placeholder="Confirm your password...">
             </div>
             <button type="submit"
                     class="button-authentication">
@@ -38,6 +38,16 @@
                 <label>Already have an account? <a class="font-semibold underline" href="{{ route('get.login') }}">Login</a></label>
             </div>
         </form>
+        @if ($errors->any())
+            <div class="py-2 text-center bg-red-500 text-white">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
     </section>
 </main>
 </body>
