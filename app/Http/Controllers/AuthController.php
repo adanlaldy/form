@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use function Laravel\Prompts\error;
 
 class AuthController extends Controller
 {
@@ -84,7 +85,7 @@ class AuthController extends Controller
         // If authentication fails, return back with error.
         if (!Auth::attempt($request->only('email', 'password'))) {
 
-            return redirect()->back()->with('message', 'Invalid Credentials');
+            return redirect()->back()->withErrors( 'Invalid Credentials');
         }
 
         // If authentication succeeds, regenerate the session and redirect to the dashboard.

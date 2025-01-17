@@ -8,7 +8,7 @@
 <body class="bg-gray-200">
 <header class="text-4xl font-semibold py-8 px-14 bg-gray-700 text-white">
     <div class="flex items-center justify-between w-full">
-        <div class="flex justify-center w-full pl-14">
+        <div class="flex justify-center w-full pl-32">
             <a href="{{ route('home') }}">Survey Project</a>
         </div>
         <div class="flex justify-end space-x-8 items-center">
@@ -21,10 +21,10 @@
         </div>
     </div>
 </header>
-
-
 <main>
-
+    <div>
+        {{  }}
+    </div>
 </main>
 </body>
 </html>

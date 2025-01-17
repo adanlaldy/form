@@ -8,7 +8,7 @@
 <body class="bg-gray-200">
 <header class="text-4xl font-semibold py-10 px-14 bg-gray-700 text-white">
     <div class="flex items-center justify-between w-full">
-        <div class="flex justify-center w-full pl-20">
+        <div class="flex justify-center w-full pl-40">
             <a href="{{ route('home') }}">Survey Project</a>
         </div>
         <div class="flex justify-end space-x-8 items-center">
@@ -26,19 +26,19 @@
             @csrf
             <div class="flex flex-col">
                 <label>Name</label>
-                <input class="border rounded-md" name="name" placeholder="Enter your name...">
+                <input type="text" class="border rounded-md" name="name" placeholder="Enter your name...">
             </div>
             <div class="flex flex-col">
                 <label>Email</label>
-                <input class="border rounded-md" name="email" placeholder="Enter your email...">
+                <input type="email" class="border rounded-md" name="email" placeholder="Enter your email...">
             </div>
             <div class="flex flex-col">
                 <label>Password</label>
-                <input class="border rounded-md" name="password" placeholder="Enter a password...">
+                <input type="password" class="border rounded-md" name="password" placeholder="Enter a password...">
             </div>
             <div class="flex flex-col">
                 <label>Password confirmation</label>
-                <input class="border rounded-md" name="password_confirmation" placeholder="Confirm your password...">
+                <input type="password" class="border rounded-md" name="password_confirmation" placeholder="Confirm your password...">
             </div>
             <button type="submit"
                     class="button-authentication">
