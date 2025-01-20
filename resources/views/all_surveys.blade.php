@@ -12,7 +12,7 @@
             <a href="{{ route('home') }}">Survey Project</a>
         </div>
         <div class="flex justify-end space-x-8 items-center">
-            <a href="{{ route('get.login') }}" class="flex size-14">
+            <a href="{{ route('get.survey') }}" class="flex size-14">
                 <img src="/images/add.png" alt="new survey button">
             </a>
             <a href="{{ route('logout') }}" class="flex size-16">
@@ -23,7 +23,7 @@
 </header>
 <main>
     <div>
-        {{  }}
+        {{ $user->token }}
     </div>
 </main>
 </body>

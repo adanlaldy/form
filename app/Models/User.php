@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use MongoDB\Laravel\Auth\User as Authenticatable;
+use MongoDB\Laravel\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -46,5 +47,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // Public function to declare the relation 1/N with Survey class.
+    public function surveys(): HasMany{
+        return $this->HasMany(Survey::class);
     }
 }

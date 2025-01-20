@@ -6,9 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
-use function Laravel\Prompts\error;
 
 class AuthController extends Controller
 {
@@ -54,7 +52,7 @@ class AuthController extends Controller
         User::create($validatedData);
 
         // Redirect to log in view.
-        return redirect()->route('get.login')->with('message', 'Your account has been created');
+        return to_route('get.login')->with('message', 'Your account has been created');
     }
 
     /**
@@ -62,7 +60,7 @@ class AuthController extends Controller
      *
      * @return View
      */
-    public function loginForm()
+    public function loginForm(): View
     {
         // Return log in view.
         return view('login');
@@ -77,20 +75,20 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         // Check if input are valid with the method validate() and return an error if failed.
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
         // If authentication fails, return back with error.
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($credentials)) {
 
-            return redirect()->back()->withErrors( 'Invalid Credentials');
+            return back()->withErrors( 'Invalid Credentials');
         }
 
         // If authentication succeeds, regenerate the session and redirect to the dashboard.
         $request->session()->regenerate();
-        return redirect()->route('all.surveys')->with('message', 'You have been logged in');
+        return to_route('all.surveys')->with('message', 'You have been logged in');
     }
 
     /***
@@ -104,7 +102,7 @@ class AuthController extends Controller
         Auth::logout();
 
         // Redirect to log in view.
-        return redirect()->route('get.login')->with('message', 'You have been logged out');
+        return to_route('get.login')->with('message', 'You have been logged out');
     }
     /**
      * Display the specified resource.
