@@ -17,6 +17,7 @@ class Survey extends Model
     protected $fillable = [
         'name',
         'creator',
+        'questions',
     ];
 
     // Public function to declare the relation N/1 with User class.

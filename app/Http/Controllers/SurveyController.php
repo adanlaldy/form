@@ -13,6 +13,23 @@ use MongoDB\BSON\ObjectId;
 class SurveyController extends Controller
 {
     /**
+     * Get the MongoDB User id.
+     *
+     * @return string
+     */
+    private function getMongoUserId(): string
+    {
+        // Retrieve the currently authenticated User.
+        $user = Auth::user();
+
+        // Retrieve the User from MongoDB.
+        $mongoUser = User::where('email', $user->email)->first();
+
+        // Return the _id.
+        return $mongoUser->_id;
+    }
+
+    /**
      * Show the all surveys page.
      *
      * @return View
@@ -23,32 +40,38 @@ class SurveyController extends Controller
         $user = Auth::user();
 
         // Return all surveys view.
-        return view('all_surveys')->with('user', $user);
+        return view('app/all_surveys')->with('user', $user);
     }
 
     /**
-     * Show the form for creating a new survey.
+     * Show the form for creating or editing a survey.
      *
      * @return View
      */
     public function surveyForm(): View
     {
-        // Retrieve the currently authenticated user.
-        $user = Auth::user();
+        // Retrieve the _id of the User connected in MongoDB.
+        $mongoUserId = $this->getMongoUserId();
 
-        // Collect the name of the Survey
-        // Return survey view.
-        return view('survey');
+        // Create a ObjectId with the $mongoUserId to using the Eloquent command.
+        $userObjectId = new ObjectId($mongoUserId);
+
+        // Retrieve the Survey with the $userObjectId and the questions empty.
+        $survey = Survey::where('creator', $userObjectId)->whereRaw(['questions' => ['$size' => 0]])->first();
+
+        // Return survey view with $survey.
+        return view('app/survey')->with('survey', $survey);
     }
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param Request $request
      * @return RedirectResponse
      */
     public function storeSurveyName(Request $request): RedirectResponse
     {
-        // Check if input are valid with the method validate() and return an error if failed.
+        // Check if input are valid and unique with the method validate() and return an error if failed.
         $request->validate([
             'name' => 'required|unique:surveys:name',
         ]);
@@ -59,17 +82,14 @@ class SurveyController extends Controller
             return back()->withErrors(['name' => 'Survey name already exists']);
         }
 
-        // Retrieve the currently authenticated User.
-        $user = Auth::user();
-
-        // Retrieve the User _id from Mongo DB.
-        $mongoUser = User::where('email', $user->email)->first();
-        $mongoUserId = $mongoUser->_id;
+        // Retrieve the _id of the User connected in MongoDB.
+        $mongoUserId = $this->getMongoUserId();
 
         // Create the unique name and the ObjectId of the User for the Survey.
         Survey::create([
             'name' => $request['name'],
             'creator' => new ObjectId($mongoUserId),
+            'questions' => [],
         ]);
 
         // Redirect back with successful message.

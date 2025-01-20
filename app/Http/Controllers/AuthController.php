@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function home(): View
     {
         // Return home view.
-        return view('home');
+        return view('app/home');
     }
 
     /**
@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function registerForm(): View
     {
         // Return register view.
-        return view('register');
+        return view('app/register');
     }
 
     /**
@@ -63,7 +63,7 @@ class AuthController extends Controller
     public function loginForm(): View
     {
         // Return log in view.
-        return view('login');
+        return view('app/login');
     }
 
     /***

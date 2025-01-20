@@ -27,31 +27,21 @@
             <a class="text-blue-700" href="/survey">Survey</a>
             <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
-        <form class="flex flex-row justify-center items-center py-8 gap-3" method="POST" action="{{ route('post.surveyName') }}">
-            @csrf
-            <label class="text-lg">Enter the name of your survey:</label>
-            <input class="border rounded-md" name="name" placeholder="Enter the name here...">
-            <button type="submit"
-                    class="button-create">
-                Create the name
-            </button>
-        </form>
-        @if (session('message'))
-
-            <div class="py-2 text-center bg-green-500 text-white">
-                {{ session('message') }}
-            </div>
-
-        @endif
-        @if ($errors->any())
-            <div class="py-2 text-center bg-red-500 text-white">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @if (empty($survey->name))
+            <form class="flex flex-row justify-center items-center py-8 gap-3" method="POST" action="{{ route('post.surveyName') }}">
+                @csrf
+                <label class="text-lg">Enter the name of your survey:</label>
+                <input class="border rounded-md" name="name" placeholder="Enter the name here...">
+                <button type="submit"
+                        class="button-create">
+                    Create the name
+                </button>
+            </form>
+        @else
+            Bonjour
+        @endIf
+        <x-message></x-message>
+        <x-error></x-error>
     </section>
 </main>
 </body>
