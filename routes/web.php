@@ -34,12 +34,15 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(SurveyController::class)->middleware('auth')->group(function () {
 
     // GET route to show all surveys form.
-    Route::get('all-surveys', 'allSurveys')->name('all.surveys');
+    Route::get('all-surveys', 'allSurveysForm')->name('all.surveys');
 
     // GET route to show the survey form.
     Route::get('survey', 'surveyForm')->name('get.survey');
 
     // POST route to create a unique survey name and store ObjectId with the User.
     Route::post('survey-name', 'storeSurveyName')->name('post.surveyName');
+
+    // Post route to create a question.
+    Route::post('survey', 'storeSurveyQuestion')->name('post.surveyQuestion');
 });
 

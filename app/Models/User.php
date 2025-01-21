@@ -50,7 +50,8 @@ class User extends Authenticatable
     }
 
     // Public function to declare the relation 1/N with Survey class.
-    public function surveys(): HasMany{
+    public function surveys(): HasMany
+    {
         return $this->HasMany(Survey::class);
     }
 }

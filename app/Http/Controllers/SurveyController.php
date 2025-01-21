@@ -34,7 +34,7 @@ class SurveyController extends Controller
      *
      * @return View
      */
-    public function allSurveys(): View
+    public function allSurveysForm(): View
     {
         // Retrieve the currently authenticated user.
         $user = Auth::user();
