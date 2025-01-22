@@ -64,7 +64,7 @@ class SurveyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new name Survey in storage.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -95,6 +95,7 @@ class SurveyController extends Controller
         // Redirect back with successful message.
         return back()->with('message', 'The name is valid! You can now continue to edit your Survey.');
     }
+
 
     /**
      * Display the specified resource.

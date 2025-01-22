@@ -1,34 +1,19 @@
-// Collect radio inputs.
-const radioOpenAnswers = document.getElementById('open_answers');
-const radioMultipleChoices = document.getElementById('multiple_choices');
-const radioUniqueChoice = document.getElementById('unique_choice');
 
-// Collect text labels.
-const textOpen = document.getElementById('text_open');
-const textMultiple = document.getElementById('text_multiple');
-const textUnique = document.getElementById('text_unique');
+// Collect all link images.
+const images = [
+    document.getElementById('new_survey'),
+    document.getElementById('logout'),
+    document.getElementById('btn_new_answer'),
+];
 
-// Function to update each text if the radio associate is checked.
-function updateTextDisplay() {
-    // Reset all texts.
-    textOpen.style.display = "none";
-    textMultiple.style.display = "none";
-    textUnique.style.display = "none";
 
-    // Condition to check if a radio input is checked.
-    if (radioOpenAnswers.checked) {
-        textOpen.style.display = "block";
-    } else if (radioMultipleChoices.checked) {
-        textMultiple.style.display = "block";
-    } else if (radioUniqueChoice.checked) {
-        textUnique.style.display = "block";
-    }
-}
+images.forEach(button => {
+    button.addEventListener('mouseover', () => {
+        button.style.transform = 'scale(1.2)';
+        button.style.transition = 'transform 0.3s';
+    });
 
-// Event Listener for each radio input.
-radioOpenAnswers.addEventListener('change', updateTextDisplay);
-radioMultipleChoices.addEventListener('change', updateTextDisplay);
-radioUniqueChoice.addEventListener('change', updateTextDisplay);
-
-// Launch the function.
-updateTextDisplay();
+    button.addEventListener('mouseout', () => {
+        button.style.transform = 'scale(1)';
+    });
+});

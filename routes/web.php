@@ -42,7 +42,7 @@ Route::controller(SurveyController::class)->middleware('auth')->group(function (
     // POST route to create a unique survey name and store ObjectId with the User.
     Route::post('survey-name', 'storeSurveyName')->name('post.surveyName');
 
-    // Post route to create a question.
-    Route::post('survey', 'storeSurveyQuestion')->name('post.surveyQuestion');
+    // POST route to create a survey.
+    Route::post('survey', 'storeSurvey')->name('post.survey');
 });
 

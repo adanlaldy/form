@@ -11,7 +11,7 @@
 <main class="pt-6">
     <section class="mx-auto w-2/3 flex flex-col rounded-lg shadow-2xl bg-white">
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
-            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="/survey">Survey</a>
+            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.survey') }}">Survey</a>
             <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
 
@@ -29,17 +29,56 @@
             </form>
         @else
             <div class="flex flex-row justify-center gap-36">
-                <form class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.surveyQuestion') }}">
+
+{{--            Form for open choice option.--}}
+                <form id="open_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.survey') }}">
                     @csrf
                     <label>Choose a title for the question:</label>
-                    <input class="border rounded-md" name="name" placeholder="Enter the title here...">
+                    <input class="border rounded-md mb-6 w-full" name="title" placeholder="Enter the title here...">
                     <button type="submit"
-                            class="button-create">
-                        Create the name
+                            class="button-create w-full">
+                        Create the survey
                     </button>
                 </form>
+
+{{--            Form for multiple choice option.--}}
+                <form id="multiple_form" class="w-1/4 flex flex-col py-8 " method="POST" action="{{ route('post.survey') }}">
+                    @csrf
+                    <label>Choose a title for the question:</label>
+                    <input class="border rounded-md mb-6 w-full" name="title" placeholder="Enter the title here...">
+
+                    <label>Create answers:</label>
+                    <div id="add_answer" class="flex gap-2">
+                        <input id="new_answer" class="border rounded-md mb-6 w-full" value="Answer n°1">
+                        <button id="btn_new_answer" class="size-6">
+                            <img src="/images/plus.png" alt="new answer button">
+                        </button>
+                    </div>
+
+                    <div class="hidden rounded-lg border-dashed border-2 border-sky-500 bg-blue-100 mb-6" id="added_answer"></div>
+
+                    <button type="submit"
+                            class="button-create w-full">
+                        Create the survey
+                    </button>
+                </form>
+
+{{--            Form for unique choice option.--}}
+                <form id="unique_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.survey') }}">
+                    @csrf
+                    <label>Choose a title for the question:</label>
+                    <input class="border rounded-md mb-6 w-full" name="name" placeholder="Enter the title here...">
+                    <label>Create answers:</label>
+                    <input class="border rounded-md mb-6 w-full" name="name" value="Option n°1">
+                    <button type="submit"
+                            class="button-create w-full">
+                        TEST
+                    </button>
+                </form>
+
+{{--            Radio form for radio inputs.--}}
                 <form class="w-1/3 text-md flex flex-row items-start py-8 gap-2" method="POST"
-                      action="{{ route('post.surveyQuestion') }}">
+                      action="{{ route('post.survey') }}">
                     @csrf
 
                     <div class="flex flex-col gap-y-2">
@@ -77,7 +116,9 @@
         <x-error></x-error>
     </section>
 </main>
-{{--Load animations script.--}}
+{{--Load scripts.--}}
+@vite('resources/js/display_question_forms.js')
+@vite('resources/js/add_answer.js')
 @vite('resources/js/animations.js')
 </body>
 </html>

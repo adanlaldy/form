@@ -4,10 +4,10 @@
             <a href="{{ route('all.surveys') }}">Survey Project</a>
         </div>
         <div class="flex justify-end space-x-8 items-center">
-            <a href="{{ route('get.survey') }}" class="flex size-14">
-                <img src="/images/add.png" alt="new survey button">
+            <a id="new_survey" href="{{ route('get.survey') }}" class="flex size-14">
+                <img src="/images/contact-form.png" alt="new survey button">
             </a>
-            <a href="{{ route('logout') }}" class="flex size-16">
+            <a id="logout" href="{{ route('logout') }}" class="flex size-16">
                 <img src="/images/logout.png" alt="logout button">
             </a>
         </div>
