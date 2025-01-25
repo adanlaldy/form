@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,16 +34,29 @@ Route::controller(AuthController::class)->group(function () {
 // All routes from SurveyController.
 Route::controller(SurveyController::class)->middleware('auth')->group(function () {
 
-    // GET route to show all surveys form.
+    // GET route to show all Surveys form.
     Route::get('all-surveys', 'allSurveysForm')->name('all.surveys');
 
-    // GET route to show the survey form.
-    Route::get('survey', 'surveyForm')->name('get.survey');
 
-    // POST route to create a unique survey name and store ObjectId with the User.
-    Route::post('survey-name', 'storeSurveyName')->name('post.surveyName');
+    // POST route to create a unique survey title and store ObjectId with the User.
+    //Route::post('survey-title', 'storeSurveyTitle')->name('post.surveyTitle');
 
-    // POST route to create a survey.
+    // POST route to create a Survey.
     Route::post('survey', 'storeSurvey')->name('post.survey');
+
+
+});
+
+// All routes from QuestionController.
+Route::controller(QuestionController::class)->middleware('auth')->group(function () {
+
+    // GET route to show the Questions form.
+    Route::get('question', 'questionForm')->name('get.question');
+
+    // POST route to create an open choice Question.
+    Route::post('open-question', 'storeOpenQuestion')->name('post.openQuestion');
+
+    // POST route to create a multiple choices Question.
+    Route::post('multiple-question', 'storeMultipleQuestion')->name('post.multipleQuestion');
 });
 

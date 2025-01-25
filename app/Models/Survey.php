@@ -16,7 +16,7 @@ class Survey extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'title',
         'creator',
         'questions',
     ];

@@ -4,7 +4,7 @@
             <a href="{{ route('all.surveys') }}">Survey Project</a>
         </div>
         <div class="flex justify-end space-x-10 items-center">
-            <a id="new_survey" href="{{ route('get.survey') }}" class="flex flex-col size-20">
+            <a id="new_survey" href="{{ route('get.question') }}" class="flex flex-col size-20">
                 <img src="/images/contact-form.png" alt="new survey button">
                 <label class="text-xs">New survey</label>
             </a>

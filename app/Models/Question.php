@@ -18,6 +18,7 @@ class Question extends Model
         'title',
         'type',
         'answers',
+        'good_answers'
     ];
 
     // Public function to declare the relation N/1 with Survey class.
