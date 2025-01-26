@@ -1,3 +1,4 @@
+import {addAnswers} from "./add_answer.js";
 
 // Collect forms.
 const formOpen = document.getElementById('open_form');
@@ -9,11 +10,14 @@ const radioOpenAnswers = document.getElementById('open_answers');
 const radioMultipleChoices = document.getElementById('multiple_choices');
 const radioUniqueChoice = document.getElementById('unique_choice');
 
-
 // Collect text labels.
 const textOpen = document.getElementById('text_open');
 const textMultiple = document.getElementById('text_multiple');
 const textUnique = document.getElementById('text_unique');
+
+// Collect + button.
+const multipleButtonNewAnswer = document.getElementById('multiple_btn_new_answer');
+const uniqueButtonNewAnswer = document.getElementById('unique_btn_new_answer');
 
 // Function to update each text if the radio associate is checked.
 function updateTextDisplay() {
@@ -39,6 +43,7 @@ function updateTextDisplay() {
         // Display multiple elements.
         formMultiple.style.display = "block";
         textMultiple.style.display = "block";
+
     } else if (radioUniqueChoice.checked) {
 
         // Display unique elements.
@@ -51,6 +56,20 @@ function updateTextDisplay() {
 radioOpenAnswers.addEventListener('change', updateTextDisplay);
 radioMultipleChoices.addEventListener('change', updateTextDisplay);
 radioUniqueChoice.addEventListener('change', updateTextDisplay);
+
+// Event Listener to call the addAnswers function with the parameter isMultiple on true.
+multipleButtonNewAnswer.addEventListener('click', (event) => {
+
+    event.preventDefault();
+    addAnswers(true);
+});
+
+// Event Listener to call the addAnswers function with the parameter isMultiple on false.
+uniqueButtonNewAnswer.addEventListener('click', (event) => {
+
+    event.preventDefault();
+    addAnswers(false);
+});
 
 // Launch the function.
 updateTextDisplay();

@@ -67,7 +67,7 @@ class QuestionController extends Controller
 
         // Create the Question.
         Question::create([
-            'title' => $title,
+            'title' => $title['title'],
             'type' => 'open',
         ]);
 
@@ -76,7 +76,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Store a new multiple choice Question in storage.
+     * Store a new multiple choices Question in storage.
      *
      * @param Request $request
      * @return RedirectResponse
@@ -85,19 +85,19 @@ class QuestionController extends Controller
     {
         // Check if input are valid and unique with the method validate() and return an error if failed.
         $validatedData = $request->validate([
-            'title' => 'required',
-            'answer' => 'required',
+            'multiple_title' => 'required',
+            'multiple_answer' => 'required',
         ]);
 
         // Collect all answers.
-        $allAnswers = $request->input('answer');
+        $allAnswers = $request->input('multiple_answer');
 
         // Collect good answers.
         $goodAnswers = $request->input('checkbox_checked');
 
         // Create the Question.
         Question::create([
-            'title' => $validatedData['title'],
+            'title' => $validatedData['multiple_title'],
             'type' => 'multiple',
             'answers' => $allAnswers,
             'good_answers' => $goodAnswers,
@@ -107,7 +107,37 @@ class QuestionController extends Controller
         return back()->with('message', 'Well played! Your question for the survey is done.');
     }
 
-    // TODO: UNIQUE METHOD
+    /**
+     * Store a new multiple choices with one good answer Question in storage.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function storeUniqueQuestion(Request $request): RedirectResponse
+    {
+        // Check if input are valid and unique with the method validate() and return an error if failed.
+        $validatedData = $request->validate([
+            'unique_title' => 'required',
+            'unique_answer' => 'required',
+        ]);
+
+        // Collect all answers.
+        $allAnswers = $request->input('unique_answer');
+
+        // Collect good answer.
+        $goodAnswer = $request->input('radio_checked');
+
+        // Create the Question.
+        Question::create([
+            'title' => $validatedData['unique_title'],
+            'type' => 'unique',
+            'answers' => $allAnswers,
+            'good_answers' => $goodAnswer,
+        ]);
+
+        // Redirect back with successful message.
+        return back()->with('message', 'Well played! Your question for the survey is done.');
+    }
     /**
      * Display the specified resource.
      */

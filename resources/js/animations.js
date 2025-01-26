@@ -3,7 +3,8 @@
 const images = [
     document.getElementById('new_survey'),
     document.getElementById('logout'),
-    document.getElementById('btn_new_answer'),
+    document.getElementById('multiple_btn_new_answer'),
+    document.getElementById('unique_btn_new_answer'),
 ];
 
 

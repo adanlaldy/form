@@ -58,5 +58,9 @@ Route::controller(QuestionController::class)->middleware('auth')->group(function
 
     // POST route to create a multiple choices Question.
     Route::post('multiple-question', 'storeMultipleQuestion')->name('post.multipleQuestion');
+
+    // POST route to create a multiple choices with one good answer Question.
+    Route::post('unique-question', 'storeUniqueQuestion')->name('post.uniqueQuestion');
 });
+
 
