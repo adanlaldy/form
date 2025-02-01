@@ -16,10 +16,16 @@
             <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
 
-{{ $question->title }}
-{{--            @foreach ($question as $questions)--}}
-{{--                 title bitch: {{ $questions['title'] }}--}}
-{{--            @endforeach--}}
+{{--    Check if $questions has many elements.--}}
+        @if (isset($questions[0]))
+            NAME : {{ $survey->name }}
+            @foreach($questions as $question)
+                TITLE : {{ $question['title'] }}
+            @endforeach
+        @else
+            NAME : {{ $survey->name }}
+            TITLE : {{ $questions['title'] }}
+        @endif
 
         {{--    Display messages and errors.--}}
         <x-message></x-message>

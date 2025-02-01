@@ -54,7 +54,7 @@ Route::controller(QuestionController::class)->middleware('auth')->group(function
     Route::get('new-question/{survey}', 'newQuestionForm')->name('get.newQuestion');
 
     // GET route to show the created Questions form with the question in parameter.
-    Route::get('question/{question}', 'questionForm')->name('get.question');
+    Route::get('question/{survey}', 'questionForm')->name('get.question');
 
     // POST route to create an open choice Question.
     Route::post('open-question', 'storeOpenQuestion')->name('post.openQuestion');

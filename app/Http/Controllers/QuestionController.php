@@ -31,16 +31,14 @@ class QuestionController extends Controller
      * @param Survey $survey
      * @return View
      */
-    public function questionForm(Question $question): View
+    public function questionForm(Survey $survey): View
     {
-        //$survey = $survey->fresh();
-        // Collect questions from current Survey.
-//        $questions = $survey->getAttributeValue('questions');
 
-//        dd($question->title);
+        // Collect questions from current Survey.
+        $questions = $survey->getAttributeValue('questions');
 
         // Return question view.
-        return view('app/question')->with('question', $question);
+        return view('app/question', compact('survey', 'questions'));//->with('questions', $questions);
     }
 
     /**
@@ -94,7 +92,7 @@ class QuestionController extends Controller
         $survey = Survey::where('creator', $mongoUserObjectId)->latest('updated_at')->first();
 
         // Redirect back with successful message.
-        return to_route('get.question', ['question' => $question])->with('message', 'Well played! Your question for you\'re survey ' . $survey->name . ' is done.');
+        return to_route('get.question', ['survey' => $survey])->with('message', 'Well played! Your question for the survey is done.');
     }
 
     /**
