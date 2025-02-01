@@ -37,21 +37,24 @@ Route::controller(SurveyController::class)->middleware('auth')->group(function (
     // GET route to show all Surveys form.
     Route::get('all-surveys', 'allSurveysForm')->name('all.surveys');
 
+    // GET route to show my surveys.
+    Route::get('my-surveys', 'mySurveysForm')->name('get.mySurveys');
 
-    // POST route to create a unique survey title and store ObjectId with the User.
-    //Route::post('survey-title', 'storeSurveyTitle')->name('post.surveyTitle');
+    // GET route to show the new Survey form.
+    Route::get('survey', 'surveyForm')->name('get.newSurvey');
 
     // POST route to create a Survey.
-    Route::post('survey', 'storeSurvey')->name('post.survey');
-
-
+    Route::post('survey', 'storeSurvey')->name('post.newSurvey');
 });
 
 // All routes from QuestionController.
 Route::controller(QuestionController::class)->middleware('auth')->group(function () {
 
-    // GET route to show the Questions form.
-    Route::get('question', 'questionForm')->name('get.question');
+    // GET route to show the new Questions form with the Survey in parameter to get the name.
+    Route::get('new-question/{survey}', 'newQuestionForm')->name('get.newQuestion');
+
+    // GET route to show the created Questions form with the question in parameter.
+    Route::get('question/{question}', 'questionForm')->name('get.question');
 
     // POST route to create an open choice Question.
     Route::post('open-question', 'storeOpenQuestion')->name('post.openQuestion');

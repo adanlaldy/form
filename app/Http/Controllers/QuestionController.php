@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\SurveyController;
 use App\Models\Question;
-use App\Models\User;
+use App\Models\Survey;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 use MongoDB\BSON\ObjectId;
 
@@ -16,24 +15,32 @@ class QuestionController extends Controller
     /**
      * Show the form for creating or editing questions for a survey.
      *
+     * @param Survey $survey
      * @return View
      */
-    public function questionForm(): View
+    public function newQuestionForm(Survey $survey): View
     {
-//        // Retrieve the _id of the User connected in MongoDB.
-//        $mongoUserId = $this->getMongoUserId();
-//
-//        // Create a ObjectId with the $mongoUserId to using the Eloquent command.
-//        $userObjectId = new ObjectId($mongoUserId);
-//
-//        // Retrieve the Survey with the $userObjectId and the questions empty.
-//        $survey = Survey::where('creator', $userObjectId)->whereRaw(['questions' => ['$size' => 0]])->first();
-//
-//        // Return survey view with $survey.
-//        return view('app/survey')->with('survey', $survey);
 
-        // Return questions view.
-        return view('app/questions');
+        // Return new question view.
+        return view('app/new_question')->with('survey', $survey);
+    }
+
+    /**
+     * Show the form to see questions for a survey.
+     *
+     * @param Survey $survey
+     * @return View
+     */
+    public function questionForm(Question $question): View
+    {
+        //$survey = $survey->fresh();
+        // Collect questions from current Survey.
+//        $questions = $survey->getAttributeValue('questions');
+
+//        dd($question->title);
+
+        // Return question view.
+        return view('app/question')->with('question', $question);
     }
 
     /**
@@ -66,13 +73,28 @@ class QuestionController extends Controller
         ]);
 
         // Create the Question.
-        Question::create([
+        $question = Question::create([
             'title' => $title['title'],
             'type' => 'open',
         ]);
 
+        // Retrieve the ObjectId for the connected User.
+        $mongoUserObjectId = SurveyController::getMongoUserObjectId();
+
+        // Collect the Survey created by the User and update the 'questions' field.
+        Survey::where('creator', $mongoUserObjectId)
+            ->latest('updated_at')->first()
+            ->update(['questions' => [
+                '_id' => $question->_id,
+                'title' => $question->title,
+                'type' => $question->type,
+            ]]);
+
+        // Collect the Survey updated.
+        $survey = Survey::where('creator', $mongoUserObjectId)->latest('updated_at')->first();
+
         // Redirect back with successful message.
-        return back()->with('message', 'Well played! Your question for the survey is done.');
+        return to_route('get.question', ['question' => $question])->with('message', 'Well played! Your question for you\'re survey ' . $survey->name . ' is done.');
     }
 
     /**
@@ -96,7 +118,7 @@ class QuestionController extends Controller
         $goodAnswers = $request->input('checkbox_checked');
 
         // Create the Question.
-        Question::create([
+        $question = Question::create([
             'title' => $validatedData['multiple_title'],
             'type' => 'multiple',
             'answers' => $allAnswers,
@@ -104,7 +126,7 @@ class QuestionController extends Controller
         ]);
 
         // Redirect back with successful message.
-        return back()->with('message', 'Well played! Your question for the survey is done.');
+        return back()->with('message', 'Well played! Your questions for the survey are done.');
     }
 
     /**
@@ -128,7 +150,7 @@ class QuestionController extends Controller
         $goodAnswer = $request->input('radio_checked');
 
         // Create the Question.
-        Question::create([
+        $question = Question::create([
             'title' => $validatedData['unique_title'],
             'type' => 'unique',
             'answers' => $allAnswers,
@@ -136,8 +158,9 @@ class QuestionController extends Controller
         ]);
 
         // Redirect back with successful message.
-        return back()->with('message', 'Well played! Your question for the survey is done.');
+        return back()->with('message', 'Well played! Your questions for the survey are done.');
     }
+
     /**
      * Display the specified resource.
      */

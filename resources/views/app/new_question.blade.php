@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Survey</title>
+    <title>New Question</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-200">
@@ -12,7 +12,7 @@
     <section class="mx-auto w-2/3 flex flex-col rounded-lg shadow-2xl bg-white">
 
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
-            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.question') }}">Survey</a>
+            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.mySurveys') }}">Survey</a>
             <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
 
@@ -20,6 +20,7 @@
 {{--        Form for open choice option.--}}
             <form id="open_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.openQuestion') }}">
                 @csrf
+                <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="title" placeholder="Enter the title here...">
                 <button type="submit"
@@ -31,6 +32,7 @@
 {{--        Form for multiple choice option.--}}
             <form id="multiple_form" class="w-1/4 flex flex-col py-8 " method="POST" action="{{ route('post.multipleQuestion') }}">
                 @csrf
+                <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="multiple_title" placeholder="Enter the title here...">
 
@@ -54,6 +56,7 @@
 {{--        Form for unique choice option.--}}
             <form id="unique_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.uniqueQuestion') }}">
                 @csrf
+                <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="unique_title" placeholder="Enter the title here...">
 
@@ -112,6 +115,8 @@
         <x-message></x-message>
         <x-error></x-error>
     </section>
+    {{--New Survey button--}}
+    <x-new_survey_button></x-new_survey_button>
 </main>
 
 {{--Load scripts.--}}

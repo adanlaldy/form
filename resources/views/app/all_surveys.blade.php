@@ -8,9 +8,13 @@
 <body class="bg-gray-200">
 <x-connected_header></x-connected_header>
 <main>
-    <div>
-        {{ $user->token }}
-    </div>
+    <p>bjr</p>
+
+{{--New Survey button--}}
+    <x-new_survey_button></x-new_survey_button>
 </main>
+
+{{--Load scripts.--}}
+@vite('resources/js/animations.js')
 </body>
 </html>
