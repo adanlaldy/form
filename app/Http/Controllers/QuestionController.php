@@ -172,8 +172,25 @@ class QuestionController extends Controller
             'good_answers' => $goodAnswer,
         ]);
 
+        // Retrieve the ObjectId for the connected User.
+        $mongoUserObjectId = SurveyController::getMongoUserObjectId();
+
+        // Collect the Survey created by the User and update the 'questions' field.
+        Survey::where('creator', $mongoUserObjectId)
+            ->latest('updated_at')->first()
+            ->update(['questions' => [
+                '_id' => $question->_id,
+                'title' => $question->title,
+                'type' => $question->type,
+                'answers' => $question->answers,
+                'good_answers' => $question->good_answers,
+            ]]);
+
+        // Collect the Survey updated.
+        $survey = Survey::where('creator', $mongoUserObjectId)->latest('updated_at')->first();
+
         // Redirect back with successful message.
-        return back()->with('message', 'Well played! Your questions for the survey are done.');
+        return to_route('get.question', ['survey' => $survey])->with('message', 'Well played! Your question for the survey is done.');
     }
 
     /**
