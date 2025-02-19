@@ -37,11 +37,12 @@ class SurveyController extends Controller
      */
     public function allSurveysForm(): View
     {
-        // Retrieve the currently authenticated user.
-        $user = Auth::user();
+
+        // Retrieve all surveys.
+        $surveys = Survey::get();
 
         // Return all surveys view.
-        return view('app/all_surveys')->with('user', $user);
+        return view('app/all_surveys')->with('surveys', $surveys);
     }
 
     public function mySurveysForm(): View

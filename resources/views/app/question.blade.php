@@ -16,15 +16,22 @@
             <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
 
-{{--    Check if $questions has many elements.--}}
+        {{--    Check if $questions has many elements.--}}
         @if (isset($questions[0]))
-            NAME : {{ $survey->name }}
-            @foreach($questions as $question)
-                TITLE : {{ $question['title'] }}
-            @endforeach
+            <div class="flex flex-col">
+                <div class="mx-auto text-3xl py-8">{{ $survey->name }}</div>
+                @foreach($questions as $question)
+                    Question: {{ $question['title'] }}
+                    @foreach($question['answers'] as $answer)
+                    Answer: {{$answer}}
+                    @endforeach
+                @endforeach
+            </div>
         @else
-            NAME : {{ $survey->name }}
-            TITLE : {{ $questions['title'] }}
+            <div class="flex flex-col">
+                <div class="mx-auto text-3xl py-8">{{ $survey->name }}</div>
+                <div class="w-1/2 flex justify-center text-lg">Question: {{ $questions['title'] }}</div>
+            </div>
         @endif
 
         {{--    Display messages and errors.--}}

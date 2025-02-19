@@ -14,11 +14,10 @@
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
             <a class="text-blue-700 underline underline-offset-8 decoration-4"
                href="{{ route('get.mySurveys') }}">Survey</a>
-            <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
         </div>
 
         @foreach ($surveys as $survey)
-            <a href="{{ route('get.question', ['survey' => $survey]) }}" class="hover:border">
+            <a href="{{ route('get.question', ['survey' => $survey]) }}" class="hover:border-2 text-xl py-2">
                 <p>Name of the Survey: {{ $survey->name }}</p>
             </a>
         @endforeach
