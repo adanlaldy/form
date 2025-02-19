@@ -1,5 +1,10 @@
 import {addAnswers} from "./add_answer.js";
 
+// Collect the divs for inputs.
+const openDiv = document.getElementById('add_open_title');
+const multipleDiv = document.getElementById('add_multiple_title');
+const uniqueDiv = document.getElementById('add_unique_title');
+
 // Collect forms.
 const formOpen = document.getElementById('open_form');
 const formMultiple = document.getElementById('multiple_form');
@@ -22,6 +27,11 @@ const uniqueButtonNewAnswer = document.getElementById('unique_btn_new_answer');
 // Function to update each text if the radio associate is checked.
 function updateTextDisplay() {
 
+    // Reset all inputs.
+    openDiv.style.display = "none";
+    multipleDiv.style.display = "none";
+    uniqueDiv.style.display = "none";
+
     // Reset all forms.
     formOpen.style.display = "none";
     formMultiple.style.display = "none";
@@ -36,17 +46,20 @@ function updateTextDisplay() {
     if (radioOpenAnswers.checked) {
 
         // Display open elements.
+        openDiv.style.display = "block";
         formOpen.style.display = "block";
         textOpen.style.display = "block";
     } else if (radioMultipleChoices.checked) {
 
         // Display multiple elements.
+        multipleDiv.style.display = "block";
         formMultiple.style.display = "block";
         textMultiple.style.display = "block";
 
     } else if (radioUniqueChoice.checked) {
 
         // Display unique elements.
+        uniqueDiv.style.display = "block";
         formUnique.style.display = "block";
         textUnique.style.display = "block";
     }

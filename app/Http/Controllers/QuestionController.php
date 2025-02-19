@@ -64,7 +64,7 @@ class QuestionController extends Controller
         $answers = $response->getAttributeValue('answers');
 
         // Return question view.
-        return view('app/question', compact('survey','questions', 'answers', 'user'));
+        return view('app/question', compact('survey', 'questions', 'answers', 'user'));
     }
 
     /**
@@ -75,37 +75,58 @@ class QuestionController extends Controller
      */
     public function storeOpenQuestion(Request $request): RedirectResponse
     {
-        // Check if input are valid with the method validate() and return an error if failed.
-        $title = $request->validate([
+        // Check if input are valid and unique with the method validate() and return an error if failed.
+        $validatedData = $request->validate([
             'title' => 'required',
         ]);
 
-        // Create the Question.
-        $question = Question::create([
-            'title' => $title['title'],
-            'type' => 'open',
-        ]);
 
         // Retrieve the ObjectId for the connected User.
         $mongoUserObjectId = SurveyController::getMongoUserObjectId();
 
-        // Collect the Survey created by the User and update the 'questions' field.
-        Survey::where('creator', $mongoUserObjectId)
-            ->latest('updated_at')->first()
-            ->update(['questions' => [
+        $survey = Survey::where('creator', $mongoUserObjectId)
+            ->latest('updated_at')->first();
+
+        $existingQuestions = [];
+
+        if (is_object($existingQuestions)) {
+            $existingQuestions = [$existingQuestions];
+        }
+
+        $question = Question::create([
+            'title' => $validatedData['title'],
+            'type' => 'open',
+        ]);
+
+        $existingQuestions[] = [
+            '_id' => $question->_id,
+            'title' => $question->title,
+            'type' => $question->type,
+        ];
+
+        foreach ($request->input('open_title') as $title) {
+
+            $question = Question::create([
+                'title' => $title,
+                'type' => 'open',
+            ]);
+
+            $existingQuestions[] = [
                 '_id' => $question->_id,
                 'title' => $question->title,
                 'type' => $question->type,
-            ]]);
+            ];
+        }
 
+        $survey->update(['questions' => $existingQuestions]);
         // Collect the Survey updated.
-        $survey = Survey::where('creator', $mongoUserObjectId)->latest('updated_at')->first();
+        //$survey = Survey::where('creator', $mongoUserObjectId)->latest('updated_at')->first();
 
         // Retrieve the User from MongoDB.
         $userObjectId = $this->getMongoUserObjectId();
 
         // Collect questions from current Survey.
-        $questions = $survey->getAttributeValue('questions');
+        //$questions = $survey->getAttributeValue('questions');
 
         // Create the unique name and the ObjectId of the User for the Survey.
         Response::create([

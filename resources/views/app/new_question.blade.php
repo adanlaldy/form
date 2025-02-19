@@ -12,8 +12,7 @@
     <section class="mx-auto w-2/3 flex flex-col rounded-lg shadow-2xl bg-white">
 
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
-            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.mySurveys') }}">Survey</a>
-            <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
+            <a class="text-blue-700 underline underline-offset-8 decoration-4 text-2xl" href="{{ route('get.mySurveys') }}">Survey</a>
         </div>
 
         <div class="flex flex-row justify-center gap-36">
@@ -23,11 +22,14 @@
                 <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="title" placeholder="Enter the title here...">
+                <div class="hidden" id="add_open_title"></div>
                 <button type="submit"
                         class="button-create w-full">
                     Create the survey
                 </button>
             </form>
+
+            <button id="add_open_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
 
 {{--        Form for multiple choice option.--}}
             <form id="multiple_form" class="w-1/4 flex flex-col py-8 " method="POST" action="{{ route('post.multipleQuestion') }}">
@@ -35,6 +37,7 @@
                 <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="multiple_title" placeholder="Enter the title here...">
+                <div class="hidden" id="add_multiple_title"></div>
 
                 <label>Create answers:</label>
                 <div class="flex gap-2">
@@ -52,6 +55,7 @@
                     Create the survey
                 </button>
             </form>
+            <button id="add_multiple_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
 
 {{--        Form for unique choice option.--}}
             <form id="unique_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.uniqueQuestion') }}">
@@ -59,6 +63,7 @@
                 <h2 class="mb-6">Name: <span class="underline">{{ $survey->name }}</span></h2>
                 <label>Choose a title for the question:</label>
                 <input class="border rounded-md mb-6 w-full" name="unique_title" placeholder="Enter the title here...">
+                <div class="hidden" id="add_unique_title"></div>
 
                 <label>Create answers:</label>
                 <div class="flex gap-2">
@@ -76,6 +81,7 @@
                     Create the survey
                 </button>
             </form>
+            <button id="add_unique_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
 
 {{--        Radio form for radio inputs.--}}
             <form class="w-1/3 text-md flex flex-row items-start py-8 gap-2" method="POST">
@@ -121,6 +127,7 @@
 
 {{--Load scripts.--}}
 @vite('resources/js/display_question_forms.js')
+@vite('resources/js/add_title.js')
 @vite('resources/js/animations.js')
 </body>
 </html>
