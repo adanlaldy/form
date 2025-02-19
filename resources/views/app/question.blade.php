@@ -12,26 +12,49 @@
     <section class="mx-auto w-2/3 flex flex-col rounded-lg shadow-2xl bg-white">
 
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
-            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.mySurveys') }}">Survey</a>
-            <a class="hover:text-blue-700 ease-out duration-300" href="/answers">Answers</a>
+            <div class="mx-auto text-3xl">{{ $survey->name }}</div>
+
+            {{--            <a class="text-blue-700 underline underline-offset-8 decoration-4" href="{{ route('get.question', [$survey])}}">Question</a>--}}
+            {{--            <a class="hover:text-blue-700 ease-out duration-300" href="{{ route('get.response', [$survey]) }}">Answers</a>--}}
         </div>
 
         {{--    Check if $questions has many elements.--}}
         @if (isset($questions[0]))
             <div class="flex flex-col">
-                <div class="mx-auto text-3xl py-8">{{ $survey->name }}</div>
                 @foreach($questions as $question)
                     Question: {{ $question['title'] }}
-                    @foreach($question['answers'] as $answer)
-                    Answer: {{$answer}}
+                    @foreach($answers as $answer)
+                        Answer: {{$answer['answer']}}
                     @endforeach
                 @endforeach
             </div>
         @else
-            <div class="flex flex-col">
-                <div class="mx-auto text-3xl py-8">{{ $survey->name }}</div>
+            <div class="flex flex-row items-center py-8">
                 <div class="w-1/2 flex justify-center text-lg">Question: {{ $questions['title'] }}</div>
+                <form class="w-1/2 flex  items-center py-8 gap-3" method="POST" action="{{ route('post.response') }}">
+                    @csrf
+                    <input type="hidden" name="survey_id" value="{{ $survey->_id }}">
+                    <input type="hidden" name="question_id" value="{{ $questions['_id'] }}">
+                    <label class="text-lg">Add a response here:</label>
+                    <input class="border rounded-md" name="answer" placeholder="Enter the response here...">
+                    <button type="submit"
+                            class="button-create">
+                        Create response
+                    </button>
+                </form>
             </div>
+
+            @if (isset($answers[0]))
+                @foreach($answers as $answer)
+                    {{$user->name}}: {{$answer->answer}}
+                @endforeach
+            @elseif ($answers)
+                {{$user->name}}: {{$answers['answer']}}
+            @endif
+
+
+{{--            Answer: {{$answer['answer']}}--}}
+            {{--    New Response form.--}}
         @endif
 
         {{--    Display messages and errors.--}}

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +66,15 @@ Route::controller(QuestionController::class)->middleware('auth')->group(function
 
     // POST route to create a multiple choices with one good answer Question.
     Route::post('unique-question', 'storeUniqueQuestion')->name('post.uniqueQuestion');
+});
+
+// All routes from ResponseController.
+Route::controller(ResponseController::class)->middleware('auth')->group(function () {
+
+    // GET route to show the Answer form with the question in parameter.
+    //Route::get('response/{survey}', 'responseForm')->name('get.response');
+    // POST route to create a Survey.
+    Route::post('response', 'storeResponse')->name('post.response');
 });
 
 

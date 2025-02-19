@@ -5,7 +5,7 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 
-class Question extends Model
+class Answer extends Model
 {
     protected $connection = 'mongodb';
 
@@ -15,15 +15,13 @@ class Question extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'title',
-        'type',
-        'answers',
-        'good_answers',
+        'question_id',
+        'answer',
     ];
 
-    // Public function to declare the relation N/1 with Survey class.
-    public function survey(): BelongsTo
+    // Public function to declare the relation N/1 with Response class.
+    public function response(): BelongsTo
     {
-        return $this->belongsTo(Survey::class);
+        return $this->belongsTo(Response::class);
     }
 }

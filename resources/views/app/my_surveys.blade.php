@@ -13,7 +13,7 @@
 
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
             <a class="text-blue-700 underline underline-offset-8 decoration-4"
-               href="{{ route('get.mySurveys') }}">Survey</a>
+               href="{{ route('get.mySurveys') }}">Surveys</a>
         </div>
 
         @foreach ($surveys as $survey)
