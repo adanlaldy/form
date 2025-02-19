@@ -12,7 +12,7 @@
     <section class="mx-auto w-2/3 flex flex-col rounded-lg shadow-2xl bg-white">
 
         <div class="flex flex-row justify-evenly text-xl font-medium py-4 text-center bg-gray-300 rounded-t-lg">
-            <a class="text-blue-700 underline underline-offset-8 decoration-4"
+            <a class="text-blue-700 underline underline-offset-8 decoration-4 text-2xl"
                href="{{ route('get.mySurveys') }}">Surveys</a>
         </div>
 

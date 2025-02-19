@@ -68,22 +68,6 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a new open choice Question in storage.
      *
      * @param Request $request
@@ -256,37 +240,5 @@ class QuestionController extends Controller
 
         // Redirect back with successful message.
         return to_route('get.question', ['survey' => $survey])->with('message', 'Well played! Your question for the survey is done.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Question $question)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Question $question)
-    {
-        //
     }
 }

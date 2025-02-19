@@ -109,35 +109,4 @@ class AuthController extends Controller
         // Redirect to log in view.
         return to_route('get.login')->with('message', 'You have been logged out');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

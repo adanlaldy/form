@@ -99,36 +99,4 @@ class SurveyController extends Controller
     {
         return view('app/new_survey');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Survey $survey)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Survey $survey)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Survey $survey)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Survey $survey)
-    {
-        //
-    }
 }
