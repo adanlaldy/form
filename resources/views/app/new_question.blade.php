@@ -29,7 +29,9 @@
                 </button>
             </form>
 
-            <button id="add_open_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
+            <div class="items-start text-white text-lg pt-8">
+                <button id="add_open_title_button" class="rounded-lg bg-green-500 hover:bg-green-400">+ title</button>
+            </div>
 
 {{--        Form for multiple choice option.--}}
             <form id="multiple_form" class="w-1/4 flex flex-col py-8 " method="POST" action="{{ route('post.multipleQuestion') }}">
@@ -55,7 +57,9 @@
                     Create the survey
                 </button>
             </form>
-            <button id="add_multiple_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
+            <div class="flex items-start text-white text-lg pt-8">
+                <button id="add_multiple_title_button" class="rounded-lg bg-green-500 hover:bg-green-400">+ title</button>
+            </div>
 
 {{--        Form for unique choice option.--}}
             <form id="unique_form" class="w-1/4 flex flex-col py-8" method="POST" action="{{ route('post.uniqueQuestion') }}">
@@ -81,8 +85,9 @@
                     Create the survey
                 </button>
             </form>
-            <button id="add_unique_title_button" class="mt-4 p-2 bg-blue-500 text-white rounded-md">+</button>
-
+            <div class="flex items-start  text-white text-lg pt-8">
+                <button id="add_unique_title_button" class="rounded-lg bg-green-500 hover:bg-green-400">+ title</button>
+            </div>
 {{--        Radio form for radio inputs.--}}
             <form class="w-1/3 text-md flex flex-row items-start py-8 gap-2" method="POST">
                 @csrf

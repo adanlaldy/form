@@ -6,7 +6,6 @@ const uniqueDiv = document.getElementById('add_unique_title');
 document.getElementById('add_open_title_button').addEventListener('click', function() {
 
     // Afficher la div si elle était cachée
-    //TODO: REFACTOR LES HIDDEN DISPLAY NONE SUR LES BUTTONS TITLE, ACTUELLEMENT, JE CHERCHE LES DIVS MDR
     if (openDiv.classList.contains('hidden')) {
         openDiv.classList.remove('hidden');
     }
